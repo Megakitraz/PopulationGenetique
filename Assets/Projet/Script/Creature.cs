@@ -11,17 +11,22 @@ public class Creature : MonoBehaviour
 
     [SerializeField] private GameObject _prefabsArticulation;
 
-    public Articulation[] articulations;
+    public List<Articulation> articulations;
+
+    private void Start()
+    {
+        CreatCreature();
+    }
 
     private void CreatCreature()
     {
-        articulations = new Articulation[_nbArticulation];
+        articulations = new List<Articulation> ();
 
-        Articulation mainArticulation = Instantiate(_prefabsArticulation, new Vector3(0, 0, 0), Quaternion.identity, transform).GetComponent<Articulation>();
+        Articulation mainArticulation = Instantiate(_prefabsArticulation, transform.position, Quaternion.identity, transform).GetComponent<Articulation>();
 
-        articulations.Append(mainArticulation);
+        articulations.Add(mainArticulation);
 
-        mainArticulation.CreateArticulationRandomly(this,_nbArticulation);
+        mainArticulation.CreateArticulationRandomly(this,_nbArticulation-1);
 
     }
 

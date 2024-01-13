@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c8e626a0da0ea459da18189dc199c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nbArticulation: 3
+  _prefabsArticulation: {fileID: 7779272240575148455, guid: 44239c46a2f2fdc40a1d549efadb468d, type: 3}
+  articulations: []
