@@ -141,11 +141,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.23
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.32
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.z
@@ -196,17 +196,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Creature (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2569169246150016021, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3914798499946930905, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: _nbArticulation
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.87
+      value: -5.96
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.66
+      value: -2.57
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.z
@@ -349,17 +353,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Creature (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2569169246150016021, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3914798499946930905, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: _nbArticulation
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.14
+      value: -2.02
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.85
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 5664267606720307112, guid: c72cbd2853a2940478a803dfbcd1b103, type: 3}
       propertyPath: m_LocalPosition.z

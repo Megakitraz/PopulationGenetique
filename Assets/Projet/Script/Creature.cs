@@ -9,7 +9,7 @@ public class Creature : MonoBehaviour
 
     [SerializeField] private int _nbArticulation;
 
-    [SerializeField] private GameObject _prefabsArticulation;
+    public GameObject _prefabsArticulation;
 
     public List<Articulation> articulations;
 

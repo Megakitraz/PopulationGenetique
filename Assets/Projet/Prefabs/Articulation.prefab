@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8635839230229943428}
   - component: {fileID: 95669198102700153}
+  - component: {fileID: 7089454056859635616}
   m_Layer: 0
   m_Name: Articulation
   m_TagString: Untagged
@@ -130,5 +131,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkArticulations: []
-  _prefabsArticulation: {fileID: 7779272240575148455}
   _prefabsArm: {fileID: 5137396122101852839, guid: 7a23ff29a2966bc448e00834195646e4, type: 3}
+--- !u!114 &7089454056859635616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7779272240575148455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e8cb594ebed72f4bbafd9628bdcadf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allAngle:
+  - 180
+  - 0
+  allTime:
+  - 1.3
+  - 2.6
+  timeCycle: 2.6
