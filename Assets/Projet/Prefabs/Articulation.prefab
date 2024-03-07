@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkArticulations: []
   _prefabsArm: {fileID: 5137396122101852839, guid: 7a23ff29a2966bc448e00834195646e4, type: 3}
+  creature: {fileID: 0}
 --- !u!114 &7089454056859635616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allAngle:
-  - 180
+  - 90
   - 0
   allTime:
   - 1.3

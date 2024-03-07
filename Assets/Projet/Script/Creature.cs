@@ -13,6 +13,8 @@ public class Creature : MonoBehaviour
 
     public List<Articulation> articulations;
 
+    [SerializeField] private float _speed;
+
     private void Start()
     {
         CreatCreature();
@@ -26,7 +28,8 @@ public class Creature : MonoBehaviour
 
         articulations.Add(mainArticulation);
 
-        mainArticulation.CreateArticulationRandomly(this,_nbArticulation-1);
+        mainArticulation.creature = this;
+        mainArticulation.CreateArticulationRandomly(_nbArticulation-1);
 
     }
 

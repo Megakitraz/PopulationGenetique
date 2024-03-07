@@ -12,16 +12,22 @@ public class Articulation : MonoBehaviour
     private AllPositions _allPositions;
     private int _allPositionsIndex;
 
+    private float _speed;
+
+    public Creature creature;
+
     private void Start()
     {
         _allPositions = gameObject.GetComponent<AllPositions>();
         _allPositionsIndex = 0;
 
+        _speed = Random.Range(10, 180);
+
         StartCoroutine(TargetPositions());
         StartCoroutine(Movement());
     }
 
-    public void CreateArticulationRandomly(Creature creature, int numberOfArticulation)
+    public void CreateArticulationRandomly(int numberOfArticulation)
     {
         _prefabsArticulation = creature._prefabsArticulation;
         int maximum = 3;
@@ -33,8 +39,6 @@ public class Articulation : MonoBehaviour
         int b, c, d;
         Articulation articulation;
 
-        //Debug.Log(gameObject.name+": " + otherLinkArticulation);
-
         switch (otherLinkArticulation)
         {
             case 1:
@@ -43,9 +47,10 @@ public class Articulation : MonoBehaviour
                 articulation = Instantiate(_prefabsArticulation, new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle.normalized, Quaternion.identity, transform).GetComponent<Articulation>();
                 linkArticulations.Add(articulation);
                 articulation.linkArticulations.Add(this);
+                articulation.creature = creature;
                 PutArmBetweenArticulation(creature, transform, articulation.transform);
                 creature.articulations.Add(articulation);
-                articulation.CreateArticulationRandomly(creature, b);
+                articulation.CreateArticulationRandomly(b);
 
                 break;
             
@@ -56,16 +61,18 @@ public class Articulation : MonoBehaviour
                 articulation = Instantiate(_prefabsArticulation, new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle.normalized, Quaternion.identity, transform).GetComponent<Articulation>();
                 linkArticulations.Add(articulation);
                 articulation.linkArticulations.Add(this);
+                articulation.creature = creature;
                 PutArmBetweenArticulation(creature, transform, articulation.transform);
                 creature.articulations.Add(articulation);
-                articulation.CreateArticulationRandomly(creature, b);
+                articulation.CreateArticulationRandomly( b);
 
                 articulation = Instantiate(_prefabsArticulation, new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle.normalized, Quaternion.identity, transform).GetComponent<Articulation>();
                 linkArticulations.Add(articulation);
                 articulation.linkArticulations.Add(this);
+                articulation.creature = creature;
                 PutArmBetweenArticulation(creature, transform, articulation.transform);
                 creature.articulations.Add(articulation);
-                articulation.CreateArticulationRandomly(creature, c);
+                articulation.CreateArticulationRandomly( c);
                 break;
 
             case 3:
@@ -76,23 +83,26 @@ public class Articulation : MonoBehaviour
                 articulation = Instantiate(_prefabsArticulation, new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle.normalized, Quaternion.identity, transform).GetComponent<Articulation>();
                 linkArticulations.Add(articulation);
                 articulation.linkArticulations.Add(this);
+                articulation.creature = creature;
                 PutArmBetweenArticulation(creature, transform, articulation.transform);
                 creature.articulations.Add(articulation);
-                articulation.CreateArticulationRandomly(creature, b);
+                articulation.CreateArticulationRandomly( b);
 
                 articulation = Instantiate(_prefabsArticulation, new Vector2(transform.position.x , transform.position.y) + Random.insideUnitCircle.normalized, Quaternion.identity, transform).GetComponent<Articulation>();
                 linkArticulations.Add(articulation);
                 articulation.linkArticulations.Add(this);
+                articulation.creature = creature;
                 PutArmBetweenArticulation(creature, transform, articulation.transform);
                 creature.articulations.Add(articulation);
-                articulation.CreateArticulationRandomly(creature, c);
+                articulation.CreateArticulationRandomly( c);
 
                 articulation = Instantiate(_prefabsArticulation, new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle.normalized, Quaternion.identity, transform).GetComponent<Articulation>();
                 linkArticulations.Add(articulation);
                 articulation.linkArticulations.Add(this);
+                articulation.creature = creature;
                 PutArmBetweenArticulation(creature, transform, articulation.transform);
                 creature.articulations.Add(articulation);
-                articulation.CreateArticulationRandomly(creature, d);
+                articulation.CreateArticulationRandomly( d);
                 break;
 
             default:
@@ -117,7 +127,14 @@ public class Articulation : MonoBehaviour
             for (int i = 0; i < _allPositions.allTime.Length; i++)
             {
                 _allPositionsIndex = i;
-                yield return new WaitForSeconds(_allPositions.allTime[i]);
+                if (i == 0)
+                {
+                    yield return new WaitForSeconds(_allPositions.allTime[i]);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(_allPositions.allTime[i] - _allPositions.allTime[i - 1]);
+                }
             }
         }
     }
@@ -125,19 +142,44 @@ public class Articulation : MonoBehaviour
     IEnumerator Movement()
     {
         float angle = transform.rotation.eulerAngles.z;
+        int lastIndex = _allPositionsIndex;
+        float timeInLoop = 0;
         while (true)
         {
-            if(angle > _allPositions.allAngle[_allPositionsIndex])
-            {
-                angle -= (_allPositions.allAngle[_allPositionsIndex] / 500000) * Time.deltaTime;
-            }
-            else
-            {
-                angle += (_allPositions.allAngle[_allPositionsIndex] / 500000) * Time.deltaTime;
-            }
-            transform.RotateAround(Vector3.forward,angle);
+            if(lastIndex != _allPositionsIndex) timeInLoop = 0;
+            else timeInLoop += Time.deltaTime;
+
+            angle = Mathf.MoveTowardsAngle(angle, _allPositions.allAngle[_allPositionsIndex], _speed * Time.deltaTime);
+
+            transform.localRotation = Quaternion.Euler(0,0,angle);
+            lastIndex = _allPositionsIndex;
+            yield return new WaitForEndOfFrame();
+            
+        }
+    }
+
+    IEnumerator Deplacement()
+    {
+        //Start
+        Vector3 lastPosition = transform.position;
+        float deplacement;
+
+        yield return new WaitForEndOfFrame();
+        while (true)
+        {
+            //Update
+
+
+            //Late Update
+
+            lastPosition = transform.position;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void AddForce()
+    {
+
     }
 
 
