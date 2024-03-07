@@ -12,6 +12,8 @@ public class Articulation : MonoBehaviour
     private AllPositions _allPositions;
     private int _allPositionsIndex;
 
+    public float addForce;
+
     private float _speed;
 
     public Creature creature;
@@ -161,7 +163,8 @@ public class Articulation : MonoBehaviour
     IEnumerator Deplacement()
     {
         //Start
-        Vector3 lastPosition = transform.position;
+        //Vector3 lastPosition = transform.position;
+        Quaternion lastRotation = transform.rotation;
         float deplacement;
 
         yield return new WaitForEndOfFrame();
@@ -169,17 +172,12 @@ public class Articulation : MonoBehaviour
         {
             //Update
 
+            addForce = Quaternion.Angle(lastRotation, transform.rotation);
 
-            //Late Update
-
-            lastPosition = transform.position;
+            //lastPosition = transform.position;
+            lastRotation = transform.rotation;
             yield return new WaitForEndOfFrame();
         }
-    }
-
-    public void AddForce()
-    {
-
     }
 
 

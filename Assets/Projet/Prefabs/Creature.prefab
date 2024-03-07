@@ -47,3 +47,38 @@ MonoBehaviour:
   _nbArticulation: 3
   _prefabsArticulation: {fileID: 7779272240575148455, guid: 44239c46a2f2fdc40a1d549efadb468d, type: 3}
   articulations: []
+  _speed: 0
+  _curveOfCloseAngleToSwim:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.24411485
+      value: 0.8495651
+      inSlope: 0.5432712
+      outSlope: 0.5432712
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.41804725
+      outWeight: 0.18621622
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  allForce: 0
