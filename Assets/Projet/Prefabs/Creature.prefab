@@ -47,7 +47,8 @@ MonoBehaviour:
   _nbArticulation: 3
   _prefabsArticulation: {fileID: 7779272240575148455, guid: 44239c46a2f2fdc40a1d549efadb468d, type: 3}
   articulations: []
-  _speed: 0
+  _speed: 90
+  _coeficientSpeed: 1000
   _curveOfCloseAngleToSwim:
     serializedVersion: 2
     m_Curve:
@@ -81,4 +82,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  allForce: 0
+  _swimPower: 0

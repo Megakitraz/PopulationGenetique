@@ -12,7 +12,7 @@ public class Articulation : MonoBehaviour
     private AllPositions _allPositions;
     private int _allPositionsIndex;
 
-    public float addForce;
+    public Vector2 addForce;
 
     private float _speed;
 
@@ -27,6 +27,7 @@ public class Articulation : MonoBehaviour
 
         StartCoroutine(TargetPositions());
         StartCoroutine(Movement());
+        StartCoroutine(Deplacement());
     }
 
     public void CreateArticulationRandomly(int numberOfArticulation)
@@ -163,18 +164,33 @@ public class Articulation : MonoBehaviour
     IEnumerator Deplacement()
     {
         //Start
-        //Vector3 lastPosition = transform.position;
+        Vector3 lastPosition = transform.position;
         Quaternion lastRotation = transform.rotation;
-        float deplacement;
+        Vector2 deplacement = Vector2.zero;
 
         yield return new WaitForEndOfFrame();
         while (true)
         {
             //Update
 
-            addForce = Quaternion.Angle(lastRotation, transform.rotation);
+            if (lastPosition == transform.position && lastRotation == transform.rotation) 
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
 
-            //lastPosition = transform.position;
+            float angle = Quaternion.Angle(lastRotation, transform.rotation);
+
+
+            deplacement = Vector2.Perpendicular(transform.position - lastPosition).normalized;
+            //deplacement = (transform.position - lastPosition).normalized;
+
+            if (Vector2.Dot(deplacement, creature.transform.position) < 0) 
+                deplacement = -deplacement;
+
+            addForce = deplacement * angle;
+
+            lastPosition = transform.position;
             lastRotation = transform.rotation;
             yield return new WaitForEndOfFrame();
         }
