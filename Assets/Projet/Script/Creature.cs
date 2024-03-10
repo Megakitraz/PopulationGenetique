@@ -30,6 +30,11 @@ public class Creature : MonoBehaviour
         _inertie = Vector2.zero;
     }
 
+    private void OnEnable()
+    {
+        Start();
+    }
+
     public void CreatCreature()
     {
         articulations = new List<Articulation> ();

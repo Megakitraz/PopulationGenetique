@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Creature " + i);
                 
                 Vector2 positionStart = _creatures[i].transform.position;
+                _creatures[i].transform.position = Vector2.zero;
                 _creatures[i].gameObject.SetActive(true);
 
                 yield return new WaitForSeconds(_timePerRound);
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForEndOfFrame();
 
             }
-
+            Debug.Log("Selection des créatures ");
 
             List<Creature> creatures = new List<Creature>();
             foreach (var indice in HalfBiggestIndices(distancePerCreatures))
@@ -75,7 +76,18 @@ public class GameManager : MonoBehaviour
                 creatures.Add(_creatures[indice]);
             }
 
+            foreach (var indice in HalfLowestIndices(distancePerCreatures))
+            {
+                Destroy(_creatures[indice]);
+                //_creatures.Remove(_creatures[indice]);
+                
+            }
+
+
+
             yield return new WaitForEndOfFrame();
+
+            Debug.Log("Clonnage des créatures et ajout de mutation ");
 
             for (int i = 0; i < _creatures.Count; i++)
             {
@@ -84,9 +96,10 @@ public class GameManager : MonoBehaviour
                 Creature creatureClone = Instantiate(creatures[i], Vector3.zero, Quaternion.identity, _parentCreature).GetComponent<Creature>();
                 creatureClone.AddMutation(rand);
                 creatureClone.gameObject.SetActive(false);
-                _creatures.Add(creatureClone);
+                creatures.Add(creatureClone);
             }
 
+            _creatures = creatures;
 
 
 

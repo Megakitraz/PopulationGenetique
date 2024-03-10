@@ -25,4 +25,9 @@ public class AllPositions : MonoBehaviour
             
         }
     }
+
+    private void OnEnable()
+    {
+        Start();
+    }
 }

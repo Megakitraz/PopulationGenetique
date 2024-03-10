@@ -30,6 +30,11 @@ public class Articulation : MonoBehaviour
         StartCoroutine(Deplacement());
     }
 
+    private void OnEnable()
+    {
+        Start();
+    }
+
     public void CreateArticulationRandomly(int numberOfArticulation)
     {
         _prefabsArticulation = creature._prefabsArticulation;
