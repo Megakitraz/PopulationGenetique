@@ -56,11 +56,16 @@ public class Ragdoll : ScriptableObject
 
         for (int i = 0; i < length; i++)
         {
-            movementArticulations[i] = new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f);
+            movementArticulations[i] = RandomMovementArticulation();
         }
 
 
         return movementArticulations;
+    }
+
+    private MovementArticulation RandomMovementArticulation()
+    {
+        return new MovementArticulation(UnityEngine.Random.Range(0.3f, 5f), UnityEngine.Random.insideUnitSphere * 3f);
     }
 
     public static Ragdoll RagdollWithMutation(Ragdoll ragdollToMutate, int numberOfMutation)
@@ -144,43 +149,43 @@ public class Ragdoll : ScriptableObject
         switch (UnityEngine.Random.Range(0, 12))
         {
             case 0:
-                leftShoulder_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                leftShoulder_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 1:
-                leftUpArm_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                leftUpArm_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 2:
-                leftDownArm_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                leftDownArm_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 3:
-                rightShoulder_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                rightShoulder_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 4:
-                rightUpArm_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                rightUpArm_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 5:
-                rightDownArm_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                rightDownArm_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 6:
-                leftArticulation_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                leftArticulation_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 7:
-                leftUpLeg_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                leftUpLeg_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 8:
-                leftDownLeg_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                leftDownLeg_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 9:
-                rightArticulation_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                rightArticulation_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 10:
-                rightUpLeg_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                rightUpLeg_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 11:
-                rightDownLeg_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                rightDownLeg_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
             case 12:
-                head_MovementCycle.Append<MovementArticulation>(new MovementArticulation(UnityEngine.Random.Range(0.1f, 3f), UnityEngine.Random.insideUnitSphere * 5f));
+                head_MovementCycle.Append<MovementArticulation>(RandomMovementArticulation());
                 break;
 
         }
