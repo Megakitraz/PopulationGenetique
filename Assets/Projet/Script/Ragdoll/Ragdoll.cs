@@ -31,23 +31,23 @@ public class Ragdoll : ScriptableObject
     {
         this.prefabsRagdoll = prefabsRagdoll;
 
-        this.leftShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.leftUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.leftDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+        this.leftShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.leftUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.leftDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
 
-        this.rightShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.rightUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.rightDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+        this.rightShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.rightUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.rightDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
 
-        this.leftArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.leftUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.leftDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+        this.leftArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.leftUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.leftDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
 
-        this.rightArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.rightUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
-        this.rightDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+        this.rightArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.rightUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
+        this.rightDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
 
-        this.head_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+        this.head_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
     }
 
     private MovementArticulation[] RandomMovementArticulations(int length)
@@ -65,7 +65,7 @@ public class Ragdoll : ScriptableObject
 
     private MovementArticulation RandomMovementArticulation()
     {
-        return new MovementArticulation(UnityEngine.Random.Range(0.3f, 5f), UnityEngine.Random.insideUnitSphere * 3f);
+        return new MovementArticulation(UnityEngine.Random.Range(0.8f, 5f), UnityEngine.Random.insideUnitSphere * 3f);
     }
 
     public static Ragdoll RagdollWithMutation(Ragdoll ragdollToMutate, int numberOfMutation)
@@ -102,43 +102,43 @@ public class Ragdoll : ScriptableObject
         switch (UnityEngine.Random.Range(0, 12))
         {
             case 0:
-                leftShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                leftShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 1:
-                leftUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                leftUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 2:
-                leftDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                leftDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 3:
-                rightShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                rightShoulder_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 4:
-                rightUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                rightUpArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 5:
-                rightDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                rightDownArm_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 6:
-                leftArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                leftArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 7:
-                leftUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                leftUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 8:
-                leftDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                leftDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 9:
-                rightArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                rightArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 10:
-                rightUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                rightUpLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 11:
-                rightDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                rightDownLeg_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
             case 12:
-                head_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 20));
+                head_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
                 break;
 
         }
