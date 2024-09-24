@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GenetiquePopulationManager : MonoBehaviour
 {
     [SerializeField] private GameObject prefabsRagdoll;
+    [SerializeField] private GameObject prefabsTarget;
+
+    [SerializeField] private Transform parentRagdoll;
+    [SerializeField] private Transform parentTarget;
+
+    [SerializeField] private TextMeshProUGUI generationCount;
+
 
     private RagdollDepartureArrival[] populationRagdolls;
 
@@ -23,13 +31,21 @@ public class GenetiquePopulationManager : MonoBehaviour
         }
     }
 
+    private void PlaceTargets(float distanceBetweenPeople)
+    {
+        for (int i = 0; i < populationRagdolls.Length; i++)
+        {
+            Instantiate(prefabsTarget, new Vector3(distanceBetweenPeople * (i - populationRagdolls.Length / 2f), 0, 0), Quaternion.Euler(0, 0, 0), parentTarget);
+        }
+    }
+
     IEnumerator PlacePopulation(float distanceBetweenPeople)
     {
 
         for (int i = 0; i < populationRagdolls.Length; i++)
         {
             populationRagdolls[i].departurePosition = new Vector3(distanceBetweenPeople * (i - populationRagdolls.Length / 2f), 5, 0);
-            populationRagdolls[i].gameobject = Instantiate(populationRagdolls[i].ragdoll.prefabsRagdoll, populationRagdolls[i].departurePosition, Quaternion.Euler(0, 0, 0));
+            populationRagdolls[i].gameobject = Instantiate(populationRagdolls[i].ragdoll.prefabsRagdoll, populationRagdolls[i].departurePosition, Quaternion.Euler(0, 0, 0), parentRagdoll);
 
             var movementRagdoll = populationRagdolls[i].gameobject.GetComponent<MovementRagdoll>();
             movementRagdoll.ragdoll = populationRagdolls[i].ragdoll;
@@ -90,12 +106,13 @@ public class GenetiquePopulationManager : MonoBehaviour
     IEnumerator DoSimulation()
     {
         InitiatePopulation(100);
+        PlaceTargets(10);
         int generation = 0;
 
         while (true)
         {
             generation++;
-            Debug.Log($"Génération {generation}");
+            generationCount.text = $"Génération: {generation}";
 
             yield return StartCoroutine(PlacePopulation(10));
 
