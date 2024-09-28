@@ -7,6 +7,9 @@ using UnityEngine;
 public class MovementRagdoll : MonoBehaviour
 {
     public Ragdoll ragdoll;
+    public Transform head;
+    private bool recordHeadPosition = true;
+    private float recordedHeadHeightAverage;
 
     [SerializeField] private MovementBodyMember m_leftShoulder;
     [SerializeField] private MovementBodyMember m_leftUpArm;
@@ -45,5 +48,34 @@ public class MovementRagdoll : MonoBehaviour
         m_rightDownLeg.StartMovement(ragdoll.rightDownLeg_MovementCycle);
 
         m_head.StartMovement(ragdoll.head_MovementCycle);
+    }
+
+    IEnumerator CalculateAveragePositionHead()
+    {
+        int frame = 0;
+        float headHeight = 0;
+        while (recordHeadPosition)
+        {
+            frame++;
+
+            headHeight += head.position.y;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        recordedHeadHeightAverage = headHeight / (float)frame;
+        recordHeadPosition = true;
+
+    }
+
+    public void StartCalculateAveragePositionHead()
+    {
+        StartCoroutine(CalculateAveragePositionHead());
+    }
+
+    public float StopCalculateAveragePositionHead()
+    {
+        recordHeadPosition = false;
+        return recordedHeadHeightAverage;
     }
 }

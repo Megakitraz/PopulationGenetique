@@ -61,6 +61,7 @@ public class GenetiquePopulationManager : MonoBehaviour
         for (int i = 0; i < populationRagdolls.Length; i++)
         {
             populationRagdolls[i].arrivalPosition = populationRagdolls[i].gameobject.transform.GetChild(0).position;
+            populationRagdolls[i].headHeightAveragePosition = populationRagdolls[i].movementRagdoll.StopCalculateAveragePositionHead();
             Destroy(populationRagdolls[i].gameobject);
 
             yield return new WaitForEndOfFrame();
@@ -73,6 +74,7 @@ public class GenetiquePopulationManager : MonoBehaviour
         {
 
             populationRagdolls[i].movementRagdoll.StartMovement();
+            populationRagdolls[i].movementRagdoll.StartCalculateAveragePositionHead();
         }
     }
 
@@ -82,8 +84,14 @@ public class GenetiquePopulationManager : MonoBehaviour
     {
         // 1. Calculer la distance parcourue pour chaque Ragdoll
         List<RagdollDepartureArrival> sortedPopulation = new List<RagdollDepartureArrival>(populationRagdolls);
+
+        /*
         sortedPopulation.Sort((a, b) => Vector3.Distance(b.departurePosition, b.arrivalPosition)
                                         .CompareTo(Vector3.Distance(a.departurePosition, a.arrivalPosition)));
+        */
+
+        sortedPopulation.Sort((a, b) => b.headHeightAveragePosition
+                                        .CompareTo(a.headHeightAveragePosition));
 
         // 2. Garder uniquement la moitié supérieure de la population
         int halfPopulationCount = sortedPopulation.Count / 2;
@@ -135,6 +143,7 @@ public struct RagdollDepartureArrival
 {
     public Vector3 departurePosition;
     public Vector3 arrivalPosition;
+    public float headHeightAveragePosition;
     public Ragdoll ragdoll;
     public GameObject gameobject;
     public MovementRagdoll movementRagdoll;
@@ -144,6 +153,7 @@ public struct RagdollDepartureArrival
         this.ragdoll = ragdoll;
         this.departurePosition = new Vector3(0, 0, 0);
         this.arrivalPosition = new Vector3(0, 0, 0);
+        this.headHeightAveragePosition = 0;
         this.gameobject = null;
         this.movementRagdoll = null;
     }

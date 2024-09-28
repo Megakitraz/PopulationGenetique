@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdoll: {fileID: 0}
+  head: {fileID: 3717752356156366757}
   m_leftShoulder: {fileID: 7501659549930936863}
   m_leftUpArm: {fileID: 8222202201185510194}
   m_leftDownArm: {fileID: 8128657973138402175}
