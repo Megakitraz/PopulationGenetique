@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ragdoll: {fileID: 0}
   head: {fileID: 3717752356156366757}
+  torso: {fileID: 545110573706715460}
   m_leftShoulder: {fileID: 7501659549930936863}
   m_leftUpArm: {fileID: 8222202201185510194}
   m_leftDownArm: {fileID: 8128657973138402175}
@@ -402,6 +403,7 @@ MonoBehaviour:
   m_rightUpLeg: {fileID: 9122720591058583740}
   m_rightDownLeg: {fileID: 1406869917621877538}
   m_head: {fileID: 6372327091573064619}
+  timeStanding: 0
 --- !u!1 &2215537127022469363
 GameObject:
   m_ObjectHideFlags: 0

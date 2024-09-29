@@ -50,6 +50,9 @@ public class Ragdoll : ScriptableObject
         this.head_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 5));
     }
 
+    
+
+
     private MovementArticulation[] RandomMovementArticulations(int length)
     {
         MovementArticulation[] movementArticulations = new MovementArticulation[length];
@@ -78,6 +81,69 @@ public class Ragdoll : ScriptableObject
 
         return newRagdoll;
     }
+
+    // Fitness function evaluating standing ability
+    public float CalculateStandingFitness(Vector3 headPosition, Vector3 torsoPosition, float timeStanding)
+    {
+        // Reward for staying upright (higher head position and closer to initial torso position)
+        float heightScore = Mathf.Clamp(headPosition.y, 0, 2);  // Reward higher head position
+        float balanceScore = 1 / (1 + Vector3.Distance(torsoPosition, new Vector3(torsoPosition.x, 0, torsoPosition.z)));  // Reward proximity to initial standing position
+
+        return heightScore * balanceScore * timeStanding;
+    }
+
+    public void AdjustForBalance()
+    {
+        // Calculate the center of mass
+        Vector3 centerOfMass = CalculateCenterOfMass();
+
+        // Apply counter-force if the ragdoll is tipping over
+        if (centerOfMass.x > 0.1f || centerOfMass.z > 0.1f)
+        {
+            // Apply adjustments in leg movements to bring balance
+            leftUpLeg_MovementCycle[0].strength += new Vector3(-0.1f, 0, 0);  // Adjust left leg
+            rightUpLeg_MovementCycle[0].strength += new Vector3(0.1f, 0, 0);  // Adjust right leg
+        }
+    }
+
+    public Vector3 CalculateCenterOfMass()
+    {
+        // Find all Rigidbody components in the ragdoll
+        Rigidbody[] ragdollRigidbodies = prefabsRagdoll.GetComponentsInChildren<Rigidbody>();
+
+        Vector3 totalMassPosition = Vector3.zero;
+        float totalMass = 0f;
+
+        // Loop through each rigidbody to calculate the total mass and weighted position
+        foreach (Rigidbody rb in ragdollRigidbodies)
+        {
+            totalMassPosition += rb.worldCenterOfMass * rb.mass;  // Weighted position
+            totalMass += rb.mass;  // Accumulate total mass
+        }
+
+        // Calculate and return the center of mass by dividing weighted position by total mass
+        return totalMass > 0 ? totalMassPosition / totalMass : Vector3.zero;  // Avoid division by zero
+    }
+
+
+
+    private void DoMutationChangeMovementArticulationForBalance()
+    {
+        int jointIndex = UnityEngine.Random.Range(0, 12);
+
+        if (jointIndex == 6 || jointIndex == 9)  // Focus on legs and torso for balance
+        {
+            // More precision on lower body movements
+            leftArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 3));
+            rightArticulation_MovementCycle = RandomMovementArticulations(UnityEngine.Random.Range(1, 3));
+        }
+        else
+        {
+            DoMutationChangeMovementArticulation();  // Default mutation process
+        }
+    }
+
+
 
     public void DoMutation()
     {

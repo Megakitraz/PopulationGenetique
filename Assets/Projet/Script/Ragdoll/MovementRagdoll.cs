@@ -8,6 +8,7 @@ public class MovementRagdoll : MonoBehaviour
 {
     public Ragdoll ragdoll;
     public Transform head;
+    public Transform torso;
     private bool recordHeadPosition = true;
     private float recordedHeadHeightAverage;
 
@@ -48,6 +49,25 @@ public class MovementRagdoll : MonoBehaviour
         m_rightDownLeg.StartMovement(ragdoll.rightDownLeg_MovementCycle);
 
         m_head.StartMovement(ragdoll.head_MovementCycle);
+    }
+
+    public float timeStanding;
+
+    private void Update()
+    {
+        if (IsUpright())
+        {
+            timeStanding += Time.deltaTime;
+        }
+        else
+        {
+            timeStanding = 0;  // Reset if the ragdoll falls
+        }
+    }
+
+    private bool IsUpright()
+    {
+        return head.transform.position.y > torso.transform.position.y && Mathf.Abs(torso.transform.rotation.x) < 10f;
     }
 
     IEnumerator CalculateAveragePositionHead()

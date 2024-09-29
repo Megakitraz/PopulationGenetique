@@ -62,6 +62,9 @@ public class GenetiquePopulationManager : MonoBehaviour
         {
             populationRagdolls[i].arrivalPosition = populationRagdolls[i].gameobject.transform.GetChild(0).position;
             populationRagdolls[i].headHeightAveragePosition = populationRagdolls[i].movementRagdoll.StopCalculateAveragePositionHead();
+            populationRagdolls[i].arrivalHeadPosition = populationRagdolls[i].movementRagdoll.head.transform.position;
+            populationRagdolls[i].arrivalTorsoPosition = populationRagdolls[i].movementRagdoll.torso.transform.position;
+            populationRagdolls[i].timeStanding = populationRagdolls[i].movementRagdoll.timeStanding;
             Destroy(populationRagdolls[i].gameobject);
 
             yield return new WaitForEndOfFrame();
@@ -90,8 +93,9 @@ public class GenetiquePopulationManager : MonoBehaviour
                                         .CompareTo(Vector3.Distance(a.departurePosition, a.arrivalPosition)));
         */
 
-        sortedPopulation.Sort((a, b) => b.headHeightAveragePosition
-                                        .CompareTo(a.headHeightAveragePosition));
+        sortedPopulation.Sort((a, b) => b.ragdoll.CalculateStandingFitness(b.arrivalHeadPosition, b.arrivalTorsoPosition, b.timeStanding)
+                                    .CompareTo(a.ragdoll.CalculateStandingFitness(a.arrivalHeadPosition, a.arrivalTorsoPosition, a.timeStanding)));
+
 
         // 2. Garder uniquement la moitié supérieure de la population
         int halfPopulationCount = sortedPopulation.Count / 2;
@@ -113,7 +117,8 @@ public class GenetiquePopulationManager : MonoBehaviour
 
     IEnumerator DoSimulation()
     {
-        InitiatePopulation(100);
+        int populaionSize = 100;
+        InitiatePopulation(populaionSize);
         PlaceTargets(10);
         int generation = 0;
 
@@ -124,7 +129,7 @@ public class GenetiquePopulationManager : MonoBehaviour
 
             yield return StartCoroutine(PlacePopulation(10));
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(populaionSize/50);
 
             StartPopulationMovement();
 
@@ -143,7 +148,10 @@ public struct RagdollDepartureArrival
 {
     public Vector3 departurePosition;
     public Vector3 arrivalPosition;
+    public Vector3 arrivalHeadPosition;
+    public Vector3 arrivalTorsoPosition;
     public float headHeightAveragePosition;
+    public float timeStanding;
     public Ragdoll ragdoll;
     public GameObject gameobject;
     public MovementRagdoll movementRagdoll;
@@ -153,7 +161,10 @@ public struct RagdollDepartureArrival
         this.ragdoll = ragdoll;
         this.departurePosition = new Vector3(0, 0, 0);
         this.arrivalPosition = new Vector3(0, 0, 0);
-        this.headHeightAveragePosition = 0;
+        this.arrivalHeadPosition = new Vector3(0, 0, 0);
+        this.arrivalTorsoPosition = new Vector3(0, 0, 0);
+        this.headHeightAveragePosition = 0; 
+        this.timeStanding = 0;
         this.gameobject = null;
         this.movementRagdoll = null;
     }
