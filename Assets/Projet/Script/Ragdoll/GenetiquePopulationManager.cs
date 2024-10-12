@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GenetiquePopulationManager : MonoBehaviour
 {
+    [SerializeField] private int sizeOfThePopulation;
+
     [SerializeField] private GameObject prefabsRagdoll;
     [SerializeField] private GameObject prefabsTarget;
 
@@ -44,14 +46,14 @@ public class GenetiquePopulationManager : MonoBehaviour
 
         for (int i = 0; i < populationRagdolls.Length; i++)
         {
-            populationRagdolls[i].departurePosition = new Vector3(distanceBetweenPeople * (i - populationRagdolls.Length / 2f), 5, 0);
+            populationRagdolls[i].departurePosition = new Vector3(distanceBetweenPeople * (i - populationRagdolls.Length / 2f), 0, 0);
             populationRagdolls[i].gameobject = Instantiate(populationRagdolls[i].ragdoll.prefabsRagdoll, populationRagdolls[i].departurePosition, Quaternion.Euler(0, 0, 0), parentRagdoll);
 
             var movementRagdoll = populationRagdolls[i].gameobject.GetComponent<MovementRagdoll>();
             movementRagdoll.ragdoll = populationRagdolls[i].ragdoll;
             populationRagdolls[i].movementRagdoll = movementRagdoll;
 
-            yield return new WaitForEndOfFrame();
+            if(i % 3 == 0) yield return new WaitForEndOfFrame();
         }
     }
 
@@ -117,7 +119,7 @@ public class GenetiquePopulationManager : MonoBehaviour
 
     IEnumerator DoSimulation()
     {
-        int populaionSize = 100;
+        int populaionSize = sizeOfThePopulation;
         InitiatePopulation(populaionSize);
         PlaceTargets(10);
         int generation = 0;
